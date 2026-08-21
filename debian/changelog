@@ -1,0 +1,17 @@
+lingmo-workspaces (5.0.0+lingmo5u1) unstable; urgency=medium
+
+  * New Release for Lingmo OS.
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 21 Aug 2026 17:31:00 +0800
+
+cosmic-workspaces (1.0.12) noble; urgency=medium
+
+  * Version bump
+
+ -- Michael Murphy <michael@mmurphy.dev>  Wed, 29 Apr 2026 17:48:17 +0200
+
+cosmic-workspaces (0.1.0) jammy; urgency=medium
+
+  * Initial release.
+
+ -- Ian Scott <idscott@system76.com>  Fri, 20 Jan 2023 15:21:34 -0800
