@@ -1,5 +1,5 @@
 use cctk::workspace::{WorkspaceHandler, WorkspaceState};
-use lingmo::cctk;
+use cosmic::cctk;
 
 use super::{AppData, CaptureSource, Event};
 

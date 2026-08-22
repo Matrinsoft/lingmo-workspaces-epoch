@@ -7,16 +7,16 @@
 //! There are two backends: one that uses cosmic-comp protocols, and a mock
 //! backend for testing without any special protocols.
 
-use lingmo::cctk::cosmic_protocols::toplevel_management::v1::client::zcosmic_toplevel_manager_v1;
-use lingmo::cctk::wayland_client::protocol::wl_output;
-use lingmo::iced::platform_specific::shell::subsurface_widget::SubsurfaceBuffer;
+use cosmic::cctk::cosmic_protocols::toplevel_management::v1::client::zcosmic_toplevel_manager_v1;
+use cosmic::cctk::wayland_client::protocol::wl_output;
+use cosmic::iced::platform_specific::shell::subsurface_widget::SubsurfaceBuffer;
 use std::collections::HashSet;
 
 // Wayland backend using cosmic-comp specific protocols
 #[cfg(not(feature = "mock-backend"))]
 mod wayland;
 #[cfg(not(feature = "mock-backend"))]
-pub use lingmo::cctk::{toplevel_info::ToplevelInfo, workspace::Workspace};
+pub use cosmic::cctk::{toplevel_info::ToplevelInfo, workspace::Workspace};
 #[cfg(not(feature = "mock-backend"))]
 pub use wayland_protocols::ext::{
     foreign_toplevel_list::v1::client::ext_foreign_toplevel_handle_v1::ExtForeignToplevelHandleV1,
@@ -66,7 +66,7 @@ pub struct CaptureImage {
     pub wl_buffer: SubsurfaceBuffer,
     pub transform: wl_output::Transform,
     #[cfg(feature = "no-subsurfaces")]
-    pub image: lingmo::widget::image::Handle,
+    pub image: cosmic::widget::image::Handle,
 }
 
 #[derive(Clone, Debug)]

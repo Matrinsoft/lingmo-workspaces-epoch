@@ -1,5 +1,5 @@
-use lingmo::iced::futures::StreamExt;
-use lingmo::iced::{self};
+use cosmic::iced::futures::StreamExt;
+use cosmic::iced::{self};
 use std::any::TypeId;
 use std::hash::Hash;
 use tokio::sync::broadcast;

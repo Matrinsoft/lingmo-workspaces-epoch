@@ -2,7 +2,7 @@ use cctk::sctk::dmabuf::{DmabufFeedback, DmabufHandler, DmabufState};
 use cctk::sctk::{self};
 use cctk::wayland_client::protocol::wl_buffer;
 use cctk::wayland_client::{Connection, QueueHandle};
-use lingmo::cctk;
+use cosmic::cctk;
 
 use wayland_protocols::wp::linux_dmabuf::zv1::client::zwp_linux_buffer_params_v1::ZwpLinuxBufferParamsV1;
 use wayland_protocols::wp::linux_dmabuf::zv1::client::zwp_linux_dmabuf_feedback_v1::ZwpLinuxDmabufFeedbackV1;

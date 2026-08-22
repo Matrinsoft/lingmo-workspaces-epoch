@@ -10,26 +10,26 @@ use cctk::wayland_client::protocol::wl_output;
 use cctk::wayland_client::{Connection, Proxy};
 use cctk::wayland_protocols::ext::workspace::v1::client::ext_workspace_handle_v1;
 use clap::Parser;
-use lingmo::app::{Application, CosmicFlags};
-use lingmo::cctk::wayland_client::backend::ObjectId;
-use lingmo::core::Auto;
-use lingmo::iced::clipboard::dnd::{DndEvent, SourceEvent};
-use lingmo::iced::event::wayland::{Event as WaylandEvent, LayerEvent, OutputEvent};
-use lingmo::iced::keyboard::key::{Key, Named};
-use lingmo::iced::mouse::ScrollDelta;
-use lingmo::iced::platform_specific::shell::commands::layer_surface::destroy_layer_surface;
-use lingmo::iced::runtime::platform_specific::wayland::CornerRadius;
-use lingmo::iced::runtime::platform_specific::wayland::layer_surface::{
+use cosmic::app::{Application, CosmicFlags};
+use cosmic::cctk::wayland_client::backend::ObjectId;
+use cosmic::core::Auto;
+use cosmic::iced::clipboard::dnd::{DndEvent, SourceEvent};
+use cosmic::iced::event::wayland::{Event as WaylandEvent, LayerEvent, OutputEvent};
+use cosmic::iced::keyboard::key::{Key, Named};
+use cosmic::iced::mouse::ScrollDelta;
+use cosmic::iced::platform_specific::shell::commands::layer_surface::destroy_layer_surface;
+use cosmic::iced::runtime::platform_specific::wayland::CornerRadius;
+use cosmic::iced::runtime::platform_specific::wayland::layer_surface::{
     IcedMargin, IcedOutput, SctkLayerSurfaceSettings,
 };
-use lingmo::iced::window::{self, Id as SurfaceId};
-use lingmo::iced::{self, Rectangle, Size, Subscription, Task};
-use lingmo::scroll::DiscreteScrollState;
-use lingmo::surface::action::LiveSettings;
-use lingmo::widget::rectangle_tracker::{
+use cosmic::iced::window::{self, Id as SurfaceId};
+use cosmic::iced::{self, Rectangle, Size, Subscription, Task};
+use cosmic::scroll::DiscreteScrollState;
+use cosmic::surface::action::LiveSettings;
+use cosmic::widget::rectangle_tracker::{
     RectangleTracker, RectangleUpdate, rectangle_tracker_subscription,
 };
-use lingmo::{cctk, dbus_activation, widget};
+use cosmic::{cctk, dbus_activation, widget};
 use cosmic_comp_config::CosmicCompConfig;
 use cosmic_config::CosmicConfigEntry;
 use cosmic_config::cosmic_config_derive::CosmicConfigEntry;
@@ -203,7 +203,7 @@ struct App {
     wayland_cmd_sender: Option<calloop::channel::Sender<backend::Cmd>>,
     drag_surface: Option<(DragSurface, Size)>,
     conf: Conf,
-    core: lingmo::app::Core,
+    core: cosmic::app::Core,
     drop_target: Option<DropTarget>,
     scroll: DiscreteScrollState,
     dbus_interface: Option<dbus::Interface>,
@@ -244,7 +244,7 @@ impl Toplevels {
 }
 
 impl App {
-    fn create_surface(&mut self, output: wl_output::WlOutput) -> Task<lingmo::Action<Msg>> {
+    fn create_surface(&mut self, output: wl_output::WlOutput) -> Task<cosmic::Action<Msg>> {
         let id = SurfaceId::unique();
         self.layer_surfaces.insert(
             id,
@@ -252,7 +252,7 @@ impl App {
                 output: output.clone(),
             },
         );
-        lingmo::surface::surface_task::<Msg>(lingmo::surface::action::simple_layer_shell::<Msg>(
+        cosmic::surface::surface_task::<Msg>(cosmic::surface::action::simple_layer_shell::<Msg>(
             || LiveSettings {
                 padding: Some(IcedMargin::default()),
                 corners: Some(CornerRadius::default()),
@@ -268,11 +268,11 @@ impl App {
                 anchor: Anchor::all(),
                 ..Default::default()
             },
-            None::<fn() -> lingmo::Element<'static, lingmo::Action<Msg>>>,
+            None::<fn() -> cosmic::Element<'static, cosmic::Action<Msg>>>,
         ))
     }
 
-    fn destroy_surface(&mut self, output: &wl_output::WlOutput) -> Task<lingmo::Action<Msg>> {
+    fn destroy_surface(&mut self, output: &wl_output::WlOutput) -> Task<cosmic::Action<Msg>> {
         if let Some((id, _)) = self
             .layer_surfaces
             .iter()
@@ -285,7 +285,7 @@ impl App {
         }
     }
 
-    fn toggle(&mut self) -> Task<lingmo::Action<Msg>> {
+    fn toggle(&mut self) -> Task<cosmic::Action<Msg>> {
         if self.visible {
             self.hide()
         } else {
@@ -293,7 +293,7 @@ impl App {
         }
     }
 
-    fn show(&mut self) -> Task<lingmo::Action<Msg>> {
+    fn show(&mut self) -> Task<cosmic::Action<Msg>> {
         if !self.visible {
             self.visible = true;
             let outputs = self.outputs.clone();
@@ -318,7 +318,7 @@ impl App {
     }
 
     // Close all shell surfaces
-    fn hide(&mut self) -> Task<lingmo::Action<Msg>> {
+    fn hide(&mut self) -> Task<cosmic::Action<Msg>> {
         if let Some(interface) = self.dbus_interface.clone() {
             tokio::spawn(async move {
                 let _ = interface.hidden().await;
@@ -451,13 +451,13 @@ impl App {
     fn update_active_workspace(
         &mut self,
         workspace_handle: ObjectId,
-    ) -> Option<Task<lingmo::Action<Msg>>> {
+    ) -> Option<Task<cosmic::Action<Msg>>> {
         if let Some((cur_window, _)) = self.layer_surfaces.iter().find(|(_, layer_surface)| {
             self.workspaces
                 .for_output(&layer_surface.output)
                 .any(|w| w.handle().id() == workspace_handle)
         }) {
-            let active = lingmo::theme::active();
+            let active = cosmic::theme::active();
             let rad = active
                 .cosmic()
                 .radius_s()
@@ -495,7 +495,7 @@ impl App {
                         return None;
                     };
 
-                    Some(lingmo::surface::corner_radius::rounded_rect_strips(
+                    Some(cosmic::surface::corner_radius::rounded_rect_strips(
                         *rect, rad,
                     ))
                 })
@@ -504,7 +504,7 @@ impl App {
             strips.append(&mut rects);
 
             return Some(
-                lingmo::iced::platform_specific::shell::commands::blur::blur(
+                cosmic::iced::platform_specific::shell::commands::blur::blur(
                     *cur_window,
                     Some(strips),
                 )
@@ -517,12 +517,12 @@ impl App {
 
 impl Application for App {
     type Message = Msg;
-    type Executor = lingmo::SingleThreadExecutor;
+    type Executor = cosmic::SingleThreadExecutor;
     type Flags = Args;
     const APP_ID: &'static str = "com.system76.CosmicWorkspaces";
 
-    fn init(mut core: lingmo::app::Core, _flags: Self::Flags) -> (Self, Task<lingmo::Action<Msg>>) {
-        core.set_app_type(lingmo::core::AppType::System);
+    fn init(mut core: cosmic::app::Core, _flags: Self::Flags) -> (Self, Task<cosmic::Action<Msg>>) {
+        core.set_app_type(cosmic::core::AppType::System);
         core.set_auto_blur(Auto::Popup | Auto::Window);
         (
             Self {
@@ -535,7 +535,7 @@ impl Application for App {
     }
     // TODO: show panel and dock? Drag?
 
-    fn update(&mut self, message: Msg) -> Task<lingmo::Action<Msg>> {
+    fn update(&mut self, message: Msg) -> Task<cosmic::Action<Msg>> {
         match message {
             Msg::Rectangle(u) => match u {
                 RectangleUpdate::Rectangle(r) => {
@@ -665,7 +665,7 @@ impl Application for App {
                             desktop_info::icon_for_app_id(app_id.clone()),
                             move |path| Msg::UpdateToplevelIcon(app_id.clone(), path),
                         )
-                        .map(lingmo::Action::App);
+                        .map(cosmic::Action::App);
                         self.toplevels.0.push(Toplevel {
                             icon: None,
                             handle,
@@ -691,7 +691,7 @@ impl Application for App {
                                     desktop_info::icon_for_app_id(app_id.clone()),
                                     move |path| Msg::UpdateToplevelIcon(app_id.clone(), path),
                                 )
-                                .map(lingmo::Action::App);
+                                .map(cosmic::Action::App);
                             }
                             // XX must clean up rectangles after the window has moved
                             t_w = Some((handle.id(), info.workspace.clone()));
@@ -1053,7 +1053,7 @@ impl Application for App {
 
         Task::none()
     }
-    fn dbus_activation(&mut self, msg: dbus_activation::Message) -> Task<lingmo::Action<Msg>> {
+    fn dbus_activation(&mut self, msg: dbus_activation::Message) -> Task<cosmic::Action<Msg>> {
         if let dbus_activation::Details::Activate = msg.msg {
             self.toggle()
         } else {
@@ -1061,8 +1061,8 @@ impl Application for App {
         }
     }
 
-    fn dbus_connection(&mut self, conn: zbus::Connection) -> Task<lingmo::Action<Msg>> {
-        Task::perform(dbus::Interface::new(conn), Msg::DbusInterface).map(lingmo::Action::App)
+    fn dbus_connection(&mut self, conn: zbus::Connection) -> Task<cosmic::Action<Msg>> {
+        Task::perform(dbus::Interface::new(conn), Msg::DbusInterface).map(cosmic::Action::App)
     }
 
     fn subscription(&self) -> Subscription<Msg> {
@@ -1144,11 +1144,11 @@ impl Application for App {
         iced::Subscription::batch(subscriptions)
     }
 
-    fn view(&self) -> lingmo::Element<'_, Self::Message> {
+    fn view(&self) -> cosmic::Element<'_, Self::Message> {
         unreachable!()
     }
 
-    fn view_window(&self, id: iced::window::Id) -> lingmo::Element<'_, Self::Message> {
+    fn view_window(&self, id: iced::window::Id) -> cosmic::Element<'_, Self::Message> {
         if let Some((surface, rectangle_track)) = self
             .layer_surfaces
             .get(&id)
@@ -1157,18 +1157,18 @@ impl Application for App {
             return view::layer_surface(self, surface, id, rectangle_track);
         }
         log::error!("non-existant layer shell id {}?", id);
-        lingmo::widget::text("workspaces").into()
+        cosmic::widget::text("workspaces").into()
     }
 
     fn on_close_requested(&self, _id: SurfaceId) -> Option<Msg> {
         None
     }
 
-    fn core(&self) -> &lingmo::app::Core {
+    fn core(&self) -> &cosmic::app::Core {
         &self.core
     }
 
-    fn core_mut(&mut self) -> &mut lingmo::app::Core {
+    fn core_mut(&mut self) -> &mut cosmic::app::Core {
         &mut self.core
     }
 }
@@ -1210,8 +1210,8 @@ pub fn main() -> iced::Result {
     env_logger::init();
     init_localizer();
 
-    lingmo::app::run_single_instance::<App>(
-        lingmo::app::Settings::default()
+    cosmic::app::run_single_instance::<App>(
+        cosmic::app::Settings::default()
             .no_main_window(true)
             .exit_on_close(false),
         Args::parse(),

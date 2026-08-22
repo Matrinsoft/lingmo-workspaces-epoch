@@ -1,11 +1,11 @@
-use lingmo::iced::advanced::widget::{Id, Operation, Tree, tree};
-use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, overlay, renderer};
-use lingmo::iced::event::Event;
-use lingmo::iced::{Length, Rectangle, Size, Vector};
+use cosmic::iced::advanced::widget::{Id, Operation, Tree, tree};
+use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, overlay, renderer};
+use cosmic::iced::event::Event;
+use cosmic::iced::{Length, Rectangle, Size, Vector};
 
 use std::marker::PhantomData;
 
-pub fn mouse_interaction_wrapper<'a, Msg, T: Into<lingmo::Element<'a, Msg>>>(
+pub fn mouse_interaction_wrapper<'a, Msg, T: Into<cosmic::Element<'a, Msg>>>(
     mouse_interaction: mouse::Interaction,
     content: T,
 ) -> MouseInteractionWrapper<'a, Msg> {
@@ -17,12 +17,12 @@ pub fn mouse_interaction_wrapper<'a, Msg, T: Into<lingmo::Element<'a, Msg>>>(
 }
 
 pub struct MouseInteractionWrapper<'a, Msg> {
-    content: lingmo::Element<'a, Msg>,
+    content: cosmic::Element<'a, Msg>,
     mouse_interaction: mouse::Interaction,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MouseInteractionWrapper<'_, Msg> {
+impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for MouseInteractionWrapper<'_, Msg> {
     delegate::delegate! {
         to self.content.as_widget() {
             fn tag(&self) -> tree::Tag;
@@ -33,8 +33,8 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MouseInteractionWrapp
             fn draw(
                 &self,
                 state: &Tree,
-                renderer: &mut lingmo::Renderer,
-                theme: &lingmo::Theme,
+                renderer: &mut cosmic::Renderer,
+                theme: &cosmic::Theme,
                 style: &renderer::Style,
                 layout: Layout<'_>,
                 cursor: mouse::Cursor,
@@ -51,7 +51,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MouseInteractionWrapp
                 event: &Event,
                 layout: Layout<'_>,
                 cursor: mouse::Cursor,
-                renderer: &lingmo::Renderer,
+                renderer: &cosmic::Renderer,
                 clipboard: &mut dyn Clipboard,
                 shell: &mut Shell<'_, Msg>,
                 viewport: &Rectangle,
@@ -60,22 +60,22 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MouseInteractionWrapp
                 &'b mut self,
                 tree: &'b mut Tree,
                 layout: Layout<'b>,
-                renderer: &lingmo::Renderer,
+                renderer: &cosmic::Renderer,
                 viewport: &Rectangle,
                 translation: Vector,
-            ) -> Option<overlay::Element<'b, Msg, lingmo::Theme, lingmo::Renderer>>;
+            ) -> Option<overlay::Element<'b, Msg, cosmic::Theme, cosmic::Renderer>>;
             fn set_id(&mut self, id: Id);
             fn layout(
                     &mut self,
                     tree: &mut Tree,
-                    renderer: &lingmo::Renderer,
+                    renderer: &cosmic::Renderer,
                     limits: &layout::Limits,
                 ) -> layout::Node;
             fn operate(
                     &mut self,
                     tree: &mut Tree,
                     layout: Layout<'_>,
-                    renderer: &lingmo::Renderer,
+                    renderer: &cosmic::Renderer,
                     operation: &mut dyn Operation<()>,
                 );
         }
@@ -87,14 +87,14 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MouseInteractionWrapp
         _layout: Layout<'_>,
         _cursor: mouse::Cursor,
         _viewport: &Rectangle,
-        _renderer: &lingmo::Renderer,
+        _renderer: &cosmic::Renderer,
     ) -> mouse::Interaction {
         self.mouse_interaction
     }
 }
 
-impl<'a, Msg: 'static> From<MouseInteractionWrapper<'a, Msg>> for lingmo::Element<'a, Msg> {
+impl<'a, Msg: 'static> From<MouseInteractionWrapper<'a, Msg>> for cosmic::Element<'a, Msg> {
     fn from(widget: MouseInteractionWrapper<'a, Msg>) -> Self {
-        lingmo::Element::new(widget)
+        cosmic::Element::new(widget)
     }
 }

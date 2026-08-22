@@ -1,17 +1,17 @@
-use lingmo::cctk::cosmic_protocols::toplevel_info::v1::client::zcosmic_toplevel_handle_v1;
-use lingmo::cctk::cosmic_protocols::workspace::v2::client::zcosmic_workspace_handle_v2;
-use lingmo::cctk::wayland_client::Proxy;
-use lingmo::cctk::wayland_client::protocol::wl_output;
-use lingmo::cctk::wayland_protocols::ext::workspace::v1::client::ext_workspace_handle_v1;
-use lingmo::iced::advanced::layout::flex::Axis;
-use lingmo::iced::clipboard::mime::{AllowedMimeTypes, AsMimeTypes};
-use lingmo::iced::core::text::{Ellipsize, EllipsizeHeightLimit};
-use lingmo::iced::core::{Shadow, window};
-use lingmo::iced::platform_specific::shell::subsurface_widget::Subsurface;
-use lingmo::iced::widget::{column, row};
-use lingmo::iced::{self, Alignment, Border, Length};
-use lingmo::widget::{self, Widget, rectangle_tracker};
-use lingmo::{Apply, Element};
+use cosmic::cctk::cosmic_protocols::toplevel_info::v1::client::zcosmic_toplevel_handle_v1;
+use cosmic::cctk::cosmic_protocols::workspace::v2::client::zcosmic_workspace_handle_v2;
+use cosmic::cctk::wayland_client::Proxy;
+use cosmic::cctk::wayland_client::protocol::wl_output;
+use cosmic::cctk::wayland_protocols::ext::workspace::v1::client::ext_workspace_handle_v1;
+use cosmic::iced::advanced::layout::flex::Axis;
+use cosmic::iced::clipboard::mime::{AllowedMimeTypes, AsMimeTypes};
+use cosmic::iced::core::text::{Ellipsize, EllipsizeHeightLimit};
+use cosmic::iced::core::{Shadow, window};
+use cosmic::iced::platform_specific::shell::subsurface_widget::Subsurface;
+use cosmic::iced::widget::{column, row};
+use cosmic::iced::{self, Alignment, Border, Length};
+use cosmic::widget::{self, Widget, rectangle_tracker};
+use cosmic::{Apply, Element};
 use cosmic_comp_config::workspace::WorkspaceLayout;
 use std::collections::HashSet;
 
@@ -23,16 +23,16 @@ fn dnd_source_with_drag_surface<D: AsMimeTypes + Send + Clone + 'static>(
     drag_content: D,
     drag_surface: DragSurface,
     id: Option<iced::id::Id>,
-    child: lingmo::Element<'_, Msg>,
-    drag_icon: impl Fn() -> lingmo::Element<'static, Msg> + 'static,
-) -> lingmo::Element<'_, Msg> {
-    let mut source = lingmo::widget::dnd_source(child)
+    child: cosmic::Element<'_, Msg>,
+    drag_icon: impl Fn() -> cosmic::Element<'static, Msg> + 'static,
+) -> cosmic::Element<'_, Msg> {
+    let mut source = cosmic::widget::dnd_source(child)
         .drag_threshold(5.)
         .drag_content(move || drag_content.clone())
         .drag_icon(move |offset| {
             (
                 drag_icon().map(|_| ()),
-                lingmo::iced::core::widget::tree::State::None,
+                cosmic::iced::core::widget::tree::State::None,
                 -offset,
             )
         })
@@ -47,14 +47,14 @@ fn dnd_source_with_drag_surface<D: AsMimeTypes + Send + Clone + 'static>(
 
 fn dnd_destination_for_target<T>(
     target: DropTarget,
-    child: lingmo::Element<'_, Msg>,
+    child: cosmic::Element<'_, Msg>,
     on_finish: impl Fn(T) -> Msg + 'static,
-) -> lingmo::Element<'_, Msg>
+) -> cosmic::Element<'_, Msg>
 where
     T: AllowedMimeTypes,
 {
     let target2 = target.clone();
-    lingmo::widget::dnd_destination::dnd_destination_for_data(
+    cosmic::widget::dnd_destination::dnd_destination_for_data(
         child,
         move |data: Option<T>, _action| match data {
             Some(data) => on_finish(data),
@@ -72,7 +72,7 @@ pub(crate) fn layer_surface<'a>(
     surface: &'a LayerSurface,
     window_id: window::Id,
     rectangle_track: &rectangle_tracker::RectangleTracker<RectId>,
-) -> lingmo::Element<'a, Msg> {
+) -> cosmic::Element<'a, Msg> {
     let mut drag_toplevel = None;
     let mut drag_workspace = None;
     match &app.drag_surface {
@@ -133,7 +133,7 @@ pub(crate) fn layer_surface<'a>(
         )
     } else {
         // Shouldn't happen, but no drag destination if no active workspace found for output
-        lingmo::Element::from(toplevels)
+        cosmic::Element::from(toplevels)
     };
     let container = match layout {
         WorkspaceLayout::Vertical => widget::layer_container(
@@ -160,14 +160,14 @@ pub(crate) fn layer_surface<'a>(
         .into()
 }
 
-fn close_button(on_press: Msg) -> lingmo::Element<'static, Msg> {
+fn close_button(on_press: Msg) -> cosmic::Element<'static, Msg> {
     widget::button::custom(widget::icon::from_name("window-close-symbolic").size(16))
-        .class(lingmo::theme::Button::Destructive)
+        .class(cosmic::theme::Button::Destructive)
         .on_press(on_press)
         .into()
 }
 
-fn pin_button_style(theme: &lingmo::Theme, is_pinned: bool) -> lingmo::widget::button::Style {
+fn pin_button_style(theme: &cosmic::Theme, is_pinned: bool) -> cosmic::widget::button::Style {
     let bg_color = if is_pinned {
         theme.cosmic().accent.base.into()
     } else {
@@ -178,15 +178,15 @@ fn pin_button_style(theme: &lingmo::Theme, is_pinned: bool) -> lingmo::widget::b
     } else {
         theme.cosmic().primary(theme.transparent).on.into()
     };
-    lingmo::widget::button::Style {
+    cosmic::widget::button::Style {
         icon_color: Some(icon_color),
         background: Some(iced::Background::Color(bg_color)),
         border_radius: theme.cosmic().corner_radii.radius_m.into(),
-        ..lingmo::widget::button::Style::new()
+        ..cosmic::widget::button::Style::new()
     }
 }
 
-fn pin_button(workspace: &Workspace) -> lingmo::Element<'static, Msg> {
+fn pin_button(workspace: &Workspace) -> cosmic::Element<'static, Msg> {
     let is_pinned = workspace.is_pinned();
     crate::widgets::visibility_wrapper(
         widget::button::custom(
@@ -195,7 +195,7 @@ fn pin_button(workspace: &Workspace) -> lingmo::Element<'static, Msg> {
                 .size(16),
         )
         .padding([4, 8])
-        .class(lingmo::theme::Button::Custom {
+        .class(cosmic::theme::Button::Custom {
             // TODO adjust state for hover, etc.
             active: Box::new(move |_, theme| pin_button_style(theme, is_pinned)),
             disabled: Box::new(move |theme| pin_button_style(theme, is_pinned)),
@@ -217,12 +217,12 @@ fn pin_button(workspace: &Workspace) -> lingmo::Element<'static, Msg> {
 }
 
 fn workspace_item_appearance(
-    theme: &lingmo::Theme,
+    theme: &cosmic::Theme,
     is_active: bool,
     hovered: bool,
-) -> lingmo::widget::button::Style {
+) -> cosmic::widget::button::Style {
     let cosmic = theme.cosmic();
-    let mut appearance = lingmo::widget::button::Style::new();
+    let mut appearance = cosmic::widget::button::Style::new();
     appearance.border_radius = cosmic
         .corner_radii
         .radius_s
@@ -244,7 +244,7 @@ fn workspace_item(
     layout: WorkspaceLayout,
     is_drop_target: bool,
     has_workspace_drag: bool,
-) -> lingmo::Element<'static, Msg> {
+) -> cosmic::Element<'static, Msg> {
     let (mut image, image_height, image_width) = if let Some(img) = workspace.img.as_ref() {
         let is_rotated = matches!(
             img.transform,
@@ -309,7 +309,7 @@ fn workspace_item(
     // TODO editable name?
     let mut button = widget::button::custom(content)
         .selected(is_active)
-        .class(lingmo::theme::Button::Custom {
+        .class(cosmic::theme::Button::Custom {
             active: Box::new(move |_focused, theme| {
                 workspace_item_appearance(theme, is_active, is_drop_target)
             }),
@@ -339,7 +339,7 @@ fn workspace_drag_placeholder(
     other_workspace: &Workspace,
     other_output: &wl_output::WlOutput,
     layout: WorkspaceLayout,
-) -> lingmo::Element<'static, Msg> {
+) -> cosmic::Element<'static, Msg> {
     let drop_target = DropTarget::WorkspaceSidebarDragPlaceholder(
         other_workspace.handle().clone(),
         other_output.clone(),
@@ -349,7 +349,7 @@ fn workspace_drag_placeholder(
             .width(Length::Fill)
             .height(Length::Fill),
     )
-    .class(lingmo::theme::Button::Custom {
+    .class(cosmic::theme::Button::Custom {
         active: Box::new(|_, _| unreachable!()),
         disabled: Box::new(|theme| workspace_item_appearance(theme, true, true)),
         hovered: Box::new(|_, _| unreachable!()),
@@ -370,7 +370,7 @@ fn workspace_sidebar_entry<'a>(
     is_drop_target: bool,
     has_toplevels: bool,
     has_workspace_drag: bool,
-) -> lingmo::Element<'a, Msg> {
+) -> cosmic::Element<'a, Msg> {
     /* XXX
     let mouse_interaction = if is_drop_target {
         iced::mouse::Interaction::Crosshair
@@ -432,7 +432,7 @@ fn workspaces_sidebar<'a>(
     drag_workspace: Option<&'a backend::ExtWorkspaceHandleV1>,
     window_id: window::Id,
     rectangle_track: &rectangle_tracker::RectangleTracker<RectId>,
-) -> lingmo::Element<'a, Msg> {
+) -> cosmic::Element<'a, Msg> {
     let mut sidebar_entries = Vec::new();
     for workspace in workspaces {
         // XXX Need dnd source with same id for drag to work; but give it 0x0 size
@@ -502,8 +502,8 @@ fn workspaces_sidebar<'a>(
             widget::container(sidebar_entries_container)
                 .width(width)
                 .height(height)
-                .class(lingmo::theme::Container::custom(|theme| {
-                    lingmo::iced::widget::container::Style {
+                .class(cosmic::theme::Container::custom(|theme| {
+                    cosmic::iced::widget::container::Style {
                         text_color: Some(theme.cosmic().on_bg_color().into()),
                         icon_color: Some(theme.cosmic().on_bg_color().into()),
                         background: Some(
@@ -533,10 +533,10 @@ fn toplevel_preview(
     is_being_dragged: bool,
     window_id: window::Id,
     rectangle_track: &rectangle_tracker::RectangleTracker<RectId>,
-) -> lingmo::Element<'static, Msg> {
-    let lingmo::cosmic_theme::Spacing {
+) -> cosmic::Element<'static, Msg> {
+    let cosmic::cosmic_theme::Spacing {
         space_xxs, space_s, ..
-    } = lingmo::theme::active().cosmic().spacing;
+    } = cosmic::theme::active().cosmic().spacing;
 
     let label = widget::text::body(toplevel.info.title.clone())
         .ellipsize(Ellipsize::End(EllipsizeHeightLimit::Lines(1)));
@@ -556,11 +556,11 @@ fn toplevel_preview(
         // So that they can be blurred individually like the sidebar?
         widget::button::custom(label)
             .on_press(Msg::ActivateToplevel(toplevel.handle.clone()))
-            .class(lingmo::theme::Button::Icon)
+            .class(cosmic::theme::Button::Icon)
             .padding([space_xxs, space_s])
             .apply(widget::container)
-            .class(lingmo::theme::Container::custom(|theme| {
-                lingmo::iced::widget::container::Style {
+            .class(cosmic::theme::Container::custom(|theme| {
+                cosmic::iced::widget::container::Style {
                     background: Some(
                         iced::Color::from(theme.cosmic().background(false).component.base).into(),
                     ),
@@ -601,7 +601,7 @@ fn toplevel_preview(
             .state
             .contains(&zcosmic_toplevel_handle_v1::State::Activated),
     )
-    .class(lingmo::theme::Button::Image)
+    .class(cosmic::theme::Button::Image)
     .on_press(Msg::ActivateToplevel(toplevel.handle.clone()));
 
     widget::mouse_area(crate::widgets::size_cross_nth(
@@ -618,7 +618,7 @@ fn toplevel_previews_entry<'a>(
     is_being_dragged: bool,
     window_id: window::Id,
     rectangle_track: &rectangle_tracker::RectangleTracker<RectId>,
-) -> lingmo::Element<'a, Msg> {
+) -> cosmic::Element<'a, Msg> {
     // Dragged window still takes up space until moved, but isn't rendered while drag surface is
     // shown.
     let preview = crate::widgets::visibility_wrapper(
@@ -642,7 +642,7 @@ fn toplevel_previews<'a>(
     drag_toplevel: Option<&'a backend::ExtForeignToplevelHandleV1>,
     window_id: window::Id,
     rectangle_track: &rectangle_tracker::RectangleTracker<RectId>,
-) -> lingmo::Element<'a, Msg> {
+) -> cosmic::Element<'a, Msg> {
     let (width, height) = match layout {
         WorkspaceLayout::Vertical => (Length::FillPortion(4), Length::Fill),
         WorkspaceLayout::Horizontal => (Length::Fill, Length::FillPortion(4)),
@@ -669,7 +669,7 @@ fn toplevel_previews<'a>(
     .into()
 }
 
-fn capture_image(image: Option<&CaptureImage>, alpha: f32) -> lingmo::Element<'static, Msg> {
+fn capture_image(image: Option<&CaptureImage>, alpha: f32) -> cosmic::Element<'static, Msg> {
     if let Some(image) = image {
         #[cfg(feature = "no-subsurfaces")]
         {

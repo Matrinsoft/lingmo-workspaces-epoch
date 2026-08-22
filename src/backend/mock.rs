@@ -1,16 +1,16 @@
 // Copyright 2024 System76 <info@system76.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-use lingmo::cctk::cosmic_protocols::toplevel_info::v1::client::zcosmic_toplevel_handle_v1;
-use lingmo::cctk::cosmic_protocols::toplevel_management::v1::client::zcosmic_toplevel_manager_v1;
-use lingmo::cctk::cosmic_protocols::workspace::v2::client::zcosmic_workspace_handle_v2;
-use lingmo::cctk::wayland_client::protocol::{wl_output, wl_shm};
-use lingmo::cctk::wayland_client::{Connection, WEnum};
-use lingmo::cctk::wayland_protocols::ext::workspace::v1::client::ext_workspace_handle_v1;
-use lingmo::iced::futures::executor::block_on;
-use lingmo::iced::futures::{FutureExt, SinkExt};
-use lingmo::iced::{self};
-use lingmo::iced_winit::platform_specific::wayland::subsurface_widget::{Shmbuf, SubsurfaceBuffer};
+use cosmic::cctk::cosmic_protocols::toplevel_info::v1::client::zcosmic_toplevel_handle_v1;
+use cosmic::cctk::cosmic_protocols::toplevel_management::v1::client::zcosmic_toplevel_manager_v1;
+use cosmic::cctk::cosmic_protocols::workspace::v2::client::zcosmic_workspace_handle_v2;
+use cosmic::cctk::wayland_client::protocol::{wl_output, wl_shm};
+use cosmic::cctk::wayland_client::{Connection, WEnum};
+use cosmic::cctk::wayland_protocols::ext::workspace::v1::client::ext_workspace_handle_v1;
+use cosmic::iced::futures::executor::block_on;
+use cosmic::iced::futures::{FutureExt, SinkExt};
+use cosmic::iced::{self};
+use cosmic::iced_winit::platform_specific::wayland::subsurface_widget::{Shmbuf, SubsurfaceBuffer};
 
 use futures_channel::mpsc;
 use std::collections::HashSet;
@@ -56,7 +56,7 @@ fn create_solid_capture_image(r: u8, g: u8, b: u8) -> CaptureImage {
         .0,
         transform: wl_output::Transform::Normal,
         #[cfg(feature = "no-subsurfaces")]
-        image: lingmo::widget::image::Handle::from_rgba(512, 512, [r, g, b, 255].repeat(512 * 512)),
+        image: cosmic::widget::image::Handle::from_rgba(512, 512, [r, g, b, 255].repeat(512 * 512)),
     }
 }
 

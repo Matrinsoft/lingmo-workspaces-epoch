@@ -1,16 +1,16 @@
 //! Show one surface, sized to match the size of another (invisible) widget
 
-use lingmo::iced::advanced::widget::{Operation, Tree};
-use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, renderer};
-use lingmo::iced::event::Event;
-use lingmo::iced::{Length, Rectangle, Size};
+use cosmic::iced::advanced::widget::{Operation, Tree};
+use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, renderer};
+use cosmic::iced::event::Event;
+use cosmic::iced::{Length, Rectangle, Size};
 use std::marker::PhantomData;
 
 pub fn match_size<
     'a,
     Msg,
-    T1: Into<lingmo::Element<'a, Msg>>,
-    T2: Into<lingmo::Element<'a, Msg>>,
+    T1: Into<cosmic::Element<'a, Msg>>,
+    T2: Into<cosmic::Element<'a, Msg>>,
 >(
     matched: T1,
     shown: T2,
@@ -23,12 +23,12 @@ pub fn match_size<
 }
 
 pub struct MatchSize<'a, Msg> {
-    matched: lingmo::Element<'a, Msg>,
-    shown: lingmo::Element<'a, Msg>,
+    matched: cosmic::Element<'a, Msg>,
+    shown: cosmic::Element<'a, Msg>,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
+impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for MatchSize<'_, Msg> {
     delegate::delegate! {
         to self.matched.as_widget() {
             fn size(&self) -> Size<Length>;
@@ -40,7 +40,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
         &mut self,
         tree: &mut Tree,
         layout: Layout<'_>,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         operation: &mut dyn Operation<()>,
     ) {
         self.matched
@@ -57,7 +57,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
         event: &Event,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         clipboard: &mut dyn Clipboard,
         shell: &mut Shell<'_, Msg>,
         viewport: &Rectangle,
@@ -80,7 +80,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
         layout: Layout<'_>,
         cursor: mouse::Cursor,
         viewport: &Rectangle,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
     ) -> mouse::Interaction {
         self.shown.as_widget().mouse_interaction(
             &tree.children[1],
@@ -94,7 +94,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         limits: &layout::Limits,
     ) -> layout::Node {
         // TODO?
@@ -106,8 +106,8 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
     fn draw(
         &self,
         tree: &Tree,
-        renderer: &mut lingmo::Renderer,
-        theme: &lingmo::Theme,
+        renderer: &mut cosmic::Renderer,
+        theme: &cosmic::Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -133,8 +133,8 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for MatchSize<'_, Msg> {
     }
 }
 
-impl<'a, Msg: 'a> From<MatchSize<'a, Msg>> for lingmo::Element<'a, Msg> {
+impl<'a, Msg: 'a> From<MatchSize<'a, Msg>> for cosmic::Element<'a, Msg> {
     fn from(widget: MatchSize<'a, Msg>) -> Self {
-        lingmo::Element::new(widget)
+        cosmic::Element::new(widget)
     }
 }

@@ -1,7 +1,7 @@
-use lingmo::iced::advanced::widget::{Id, Operation, Tree, tree};
-use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, overlay, renderer};
-use lingmo::iced::event::Event;
-use lingmo::iced::{Length, Rectangle, Size, Vector};
+use cosmic::iced::advanced::widget::{Id, Operation, Tree, tree};
+use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, overlay, renderer};
+use cosmic::iced::event::Event;
+use cosmic::iced::{Length, Rectangle, Size, Vector};
 use std::marker::PhantomData;
 
 mod image_bg;
@@ -19,7 +19,7 @@ pub use match_size::match_size;
 
 // Widget for debugging
 #[allow(dead_code)]
-pub fn layout_wrapper<'a, Msg, T: Into<lingmo::Element<'a, Msg>>>(
+pub fn layout_wrapper<'a, Msg, T: Into<cosmic::Element<'a, Msg>>>(
     inner: T,
 ) -> LayoutWrapper<'a, Msg> {
     LayoutWrapper {
@@ -29,15 +29,15 @@ pub fn layout_wrapper<'a, Msg, T: Into<lingmo::Element<'a, Msg>>>(
 }
 
 pub struct LayoutWrapper<'a, Msg> {
-    content: lingmo::Element<'a, Msg>,
+    content: cosmic::Element<'a, Msg>,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for LayoutWrapper<'_, Msg> {
+impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for LayoutWrapper<'_, Msg> {
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         limits: &layout::Limits,
     ) -> layout::Node {
         self.content.as_widget_mut().layout(tree, renderer, limits)
@@ -53,8 +53,8 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for LayoutWrapper<'_, Msg
             fn draw(
                 &self,
                 state: &Tree,
-                renderer: &mut lingmo::Renderer,
-                theme: &lingmo::Theme,
+                renderer: &mut cosmic::Renderer,
+                theme: &cosmic::Theme,
                 style: &renderer::Style,
                 layout: Layout<'_>,
                 cursor: mouse::Cursor,
@@ -66,7 +66,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for LayoutWrapper<'_, Msg
                 _layout: Layout<'_>,
                 _cursor: mouse::Cursor,
                 _viewport: &Rectangle,
-                _renderer: &lingmo::Renderer,
+                _renderer: &cosmic::Renderer,
             ) -> mouse::Interaction;
             fn id(&self) -> Option<Id>;
         }
@@ -79,7 +79,7 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for LayoutWrapper<'_, Msg
                 event: &Event,
                 layout: Layout<'_>,
                 cursor: mouse::Cursor,
-                renderer: &lingmo::Renderer,
+                renderer: &cosmic::Renderer,
                 clipboard: &mut dyn Clipboard,
                 shell: &mut Shell<'_, Msg>,
                 viewport: &Rectangle,
@@ -88,24 +88,24 @@ impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for LayoutWrapper<'_, Msg
                 &'b mut self,
                 tree: &'b mut Tree,
                 layout: Layout<'b>,
-                renderer: &lingmo::Renderer,
+                renderer: &cosmic::Renderer,
                 viewport: &Rectangle,
                 transation: Vector,
-            ) -> Option<overlay::Element<'b, Msg, lingmo::Theme, lingmo::Renderer>>;
+            ) -> Option<overlay::Element<'b, Msg, cosmic::Theme, cosmic::Renderer>>;
             fn set_id(&mut self, id: Id);
             fn operate(
                     &mut self,
                     tree: &mut Tree,
                     layout: Layout<'_>,
-                    renderer: &lingmo::Renderer,
+                    renderer: &cosmic::Renderer,
                     operation: &mut dyn Operation<()>,
                 );
         }
     }
 }
 
-impl<'a, Msg: 'a> From<LayoutWrapper<'a, Msg>> for lingmo::Element<'a, Msg> {
+impl<'a, Msg: 'a> From<LayoutWrapper<'a, Msg>> for cosmic::Element<'a, Msg> {
     fn from(widget: LayoutWrapper<'a, Msg>) -> Self {
-        lingmo::Element::new(widget)
+        cosmic::Element::new(widget)
     }
 }

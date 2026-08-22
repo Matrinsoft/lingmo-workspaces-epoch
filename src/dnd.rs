@@ -1,8 +1,8 @@
 //! Types related to drag-and-drop
 
-use lingmo::cctk::wayland_client::Proxy;
-use lingmo::cctk::wayland_client::protocol::wl_output;
-use lingmo::iced::clipboard::mime::AsMimeTypes;
+use cosmic::cctk::wayland_client::Proxy;
+use cosmic::cctk::wayland_client::protocol::wl_output;
+use cosmic::iced::clipboard::mime::AsMimeTypes;
 use std::borrow::Cow;
 use std::sync::LazyLock;
 
@@ -41,7 +41,7 @@ impl AsMimeTypes for DragToplevel {
     }
 }
 
-impl lingmo::iced::clipboard::mime::AllowedMimeTypes for DragToplevel {
+impl cosmic::iced::clipboard::mime::AllowedMimeTypes for DragToplevel {
     fn allowed() -> Cow<'static, [String]> {
         vec![TOPLEVEL_MIME.clone()].into()
     }
@@ -75,7 +75,7 @@ impl AsMimeTypes for DragWorkspace {
     }
 }
 
-impl lingmo::iced::clipboard::mime::AllowedMimeTypes for DragWorkspace {
+impl cosmic::iced::clipboard::mime::AllowedMimeTypes for DragWorkspace {
     fn allowed() -> Cow<'static, [String]> {
         vec![WORKSPACE_MIME.clone()].into()
     }
@@ -98,7 +98,7 @@ pub enum Drag {
     Workspace,
 }
 
-impl lingmo::iced::clipboard::mime::AllowedMimeTypes for Drag {
+impl cosmic::iced::clipboard::mime::AllowedMimeTypes for Drag {
     fn allowed() -> Cow<'static, [String]> {
         vec![TOPLEVEL_MIME.clone(), WORKSPACE_MIME.clone()].into()
     }

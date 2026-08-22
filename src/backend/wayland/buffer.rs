@@ -1,8 +1,8 @@
 use cctk::screencopy::{Formats, Rect};
 use cctk::wayland_client::protocol::{wl_buffer, wl_shm, wl_shm_pool};
 use cctk::wayland_client::{Connection, Dispatch, QueueHandle};
-use lingmo::cctk;
-use lingmo::iced::platform_specific::shell::subsurface_widget::{
+use cosmic::cctk;
+use cosmic::iced::platform_specific::shell::subsurface_widget::{
     BufferSource, Dmabuf, Plane, Shmbuf,
 };
 use std::os::fd::AsFd;
