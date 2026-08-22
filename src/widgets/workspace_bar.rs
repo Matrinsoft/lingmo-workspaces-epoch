@@ -1,13 +1,13 @@
 // Custom varian of row/column
 // Gives each child widget a maximum size on main axis of total/n
 
-use cosmic::iced::advanced::layout::flex::Axis;
-use cosmic::iced::advanced::layout::{self};
-use cosmic::iced::advanced::widget::{Operation, Tree};
-use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, renderer};
-use cosmic::iced::core::clipboard::DndDestinationRectangles;
-use cosmic::iced::event::Event;
-use cosmic::iced::{Length, Point, Rectangle, Size};
+use lingmo::iced::advanced::layout::flex::Axis;
+use lingmo::iced::advanced::layout::{self};
+use lingmo::iced::advanced::widget::{Operation, Tree};
+use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, renderer};
+use lingmo::iced::core::clipboard::DndDestinationRectangles;
+use lingmo::iced::event::Event;
+use lingmo::iced::{Length, Point, Rectangle, Size};
 use std::marker::PhantomData;
 
 // Duplicate of private methods
@@ -40,7 +40,7 @@ impl AxisExt for Axis {
     }
 }
 
-pub fn workspace_bar<Msg>(children: Vec<cosmic::Element<Msg>>, axis: Axis) -> WorkspaceBar<Msg> {
+pub fn workspace_bar<Msg>(children: Vec<lingmo::Element<Msg>>, axis: Axis) -> WorkspaceBar<Msg> {
     WorkspaceBar {
         axis,
         children,
@@ -50,11 +50,11 @@ pub fn workspace_bar<Msg>(children: Vec<cosmic::Element<Msg>>, axis: Axis) -> Wo
 
 pub struct WorkspaceBar<'a, Msg> {
     axis: Axis,
-    children: Vec<cosmic::Element<'a, Msg>>,
+    children: Vec<lingmo::Element<'a, Msg>>,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg> {
+impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for WorkspaceBar<'_, Msg> {
     fn size(&self) -> Size<Length> {
         Size {
             width: Length::Shrink,
@@ -65,7 +65,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         limits: &layout::Limits,
     ) -> layout::Node {
         if self.children.is_empty() {
@@ -116,7 +116,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
         &mut self,
         tree: &mut Tree,
         layout: Layout<'_>,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         operation: &mut dyn Operation<()>,
     ) {
         operation.container(None, layout.bounds());
@@ -139,7 +139,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
         event: &Event,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         clipboard: &mut dyn Clipboard,
         shell: &mut Shell<'_, Msg>,
         viewport: &Rectangle,
@@ -162,7 +162,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
         layout: Layout<'_>,
         cursor: mouse::Cursor,
         viewport: &Rectangle,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
     ) -> mouse::Interaction {
         self.children
             .iter()
@@ -180,8 +180,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
     fn draw(
         &self,
         tree: &Tree,
-        renderer: &mut cosmic::Renderer,
-        theme: &cosmic::Theme,
+        renderer: &mut lingmo::Renderer,
+        theme: &lingmo::Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -213,7 +213,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
         &self,
         state: &Tree,
         layout: Layout<'_>,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         dnd_rectangles: &mut DndDestinationRectangles,
     ) {
         for ((e, layout), state) in self
@@ -228,8 +228,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for WorkspaceBar<'_, Msg>
     }
 }
 
-impl<'a, Msg: 'static> From<WorkspaceBar<'a, Msg>> for cosmic::Element<'a, Msg> {
+impl<'a, Msg: 'static> From<WorkspaceBar<'a, Msg>> for lingmo::Element<'a, Msg> {
     fn from(widget: WorkspaceBar<'a, Msg>) -> Self {
-        cosmic::Element::new(widget)
+        lingmo::Element::new(widget)
     }
 }

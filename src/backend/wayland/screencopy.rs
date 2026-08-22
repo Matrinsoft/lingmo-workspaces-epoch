@@ -1,11 +1,11 @@
-use cosmic::cctk::screencopy::{
+use lingmo::cctk::screencopy::{
     CaptureFrame, CaptureOptions, CaptureSession, CaptureSource, FailureReason, Formats, Frame,
     ScreencopyFrameData, ScreencopyFrameDataExt, ScreencopyHandler, ScreencopySessionData,
     ScreencopySessionDataExt, ScreencopyState,
 };
-use cosmic::cctk::wayland_client::{Connection, QueueHandle, WEnum};
-use cosmic::cctk::{self};
-use cosmic::iced::platform_specific::shell::subsurface_widget::{
+use lingmo::cctk::wayland_client::{Connection, QueueHandle, WEnum};
+use lingmo::cctk::{self};
+use lingmo::iced::platform_specific::shell::subsurface_widget::{
     SubsurfaceBuffer, SubsurfaceBufferRelease,
 };
 use std::array;
@@ -188,7 +188,7 @@ impl ScreencopyHandler for AppData {
                 WEnum::Unknown(value) => panic!("invalid capture transform: {}", value),
             },
             #[cfg(feature = "no-subsurfaces")]
-            image: cosmic::widget::image::Handle::from_rgba(
+            image: lingmo::widget::image::Handle::from_rgba(
                 front.size.0,
                 front.size.1,
                 front.mmap.to_vec(),

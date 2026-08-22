@@ -1,15 +1,15 @@
-use cosmic::iced::advanced::layout::flex::Axis;
-use cosmic::iced::advanced::layout::{self};
-use cosmic::iced::advanced::widget::{Operation, Tree};
-use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, renderer};
-use cosmic::iced::event::Event;
-use cosmic::iced::{Length, Rectangle, Size, Vector};
+use lingmo::iced::advanced::layout::flex::Axis;
+use lingmo::iced::advanced::layout::{self};
+use lingmo::iced::advanced::widget::{Operation, Tree};
+use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, renderer};
+use lingmo::iced::event::Event;
+use lingmo::iced::{Length, Rectangle, Size, Vector};
 use std::marker::PhantomData;
 
 mod toplevel_layout;
 use toplevel_layout::{LayoutToplevel, ToplevelLayout, TwoRowColToplevelLayout};
 
-pub fn toplevels<Msg>(children: Vec<cosmic::Element<Msg>>) -> Toplevels<Msg> {
+pub fn toplevels<Msg>(children: Vec<lingmo::Element<Msg>>) -> Toplevels<Msg> {
     Toplevels {
         // TODO configurable
         layout: TwoRowColToplevelLayout::new(Axis::Horizontal, 16),
@@ -20,11 +20,11 @@ pub fn toplevels<Msg>(children: Vec<cosmic::Element<Msg>>) -> Toplevels<Msg> {
 
 pub struct Toplevels<'a, Msg> {
     layout: TwoRowColToplevelLayout,
-    children: Vec<cosmic::Element<'a, Msg>>,
+    children: Vec<lingmo::Element<'a, Msg>>,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
+impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for Toplevels<'_, Msg> {
     fn size(&self) -> Size<Length> {
         self.layout.size()
     }
@@ -32,7 +32,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         limits: &layout::Limits,
     ) -> layout::Node {
         // Call `.layout()` on each child with full limits to determine "preferred" sizes
@@ -77,7 +77,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
         &mut self,
         tree: &mut Tree,
         layout: Layout<'_>,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         operation: &mut dyn Operation<()>,
     ) {
         operation.container(None, layout.bounds());
@@ -100,7 +100,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
         event: &Event,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         clipboard: &mut dyn Clipboard,
         shell: &mut Shell<'_, Msg>,
         viewport: &Rectangle,
@@ -123,7 +123,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
         layout: Layout<'_>,
         cursor: mouse::Cursor,
         viewport: &Rectangle,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
     ) -> mouse::Interaction {
         self.children
             .iter()
@@ -141,8 +141,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
     fn draw(
         &self,
         tree: &Tree,
-        renderer: &mut cosmic::Renderer,
-        theme: &cosmic::Theme,
+        renderer: &mut lingmo::Renderer,
+        theme: &lingmo::Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -171,8 +171,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for Toplevels<'_, Msg> {
     }
 }
 
-impl<'a, Msg: 'static> From<Toplevels<'a, Msg>> for cosmic::Element<'a, Msg> {
+impl<'a, Msg: 'static> From<Toplevels<'a, Msg>> for lingmo::Element<'a, Msg> {
     fn from(widget: Toplevels<'a, Msg>) -> Self {
-        cosmic::Element::new(widget)
+        lingmo::Element::new(widget)
     }
 }

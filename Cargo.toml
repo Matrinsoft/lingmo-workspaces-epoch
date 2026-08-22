@@ -1,4 +1,4 @@
-﻿[package]
+[package]
 name = "cosmic-workspaces"
 version = "1.0.12"
 edition = "2024"
@@ -12,7 +12,7 @@ cosmic-bg-config = { git = "https://github.com/Matrinsoft/lingmo-background" }
 cosmic-comp-config = { git = "https://github.com/Matrinsoft/lingmo-comp" }
 env_logger = "0.11.9"
 gbm = "0.18.0"
-libcosmic = { git = "https://github.com/Matrinsoft/libcosmic", default-features = false, features = [
+liblingmo = { git = "https://github.com/Matrinsoft/liblingmo", default-features = false, features = [
     "tokio",
     "wayland",
     "single-instance",
@@ -20,7 +20,7 @@ libcosmic = { git = "https://github.com/Matrinsoft/libcosmic", default-features 
     "multi-window",
     "winit",
 ] }
-cosmic-config = { git = "https://github.com/Matrinsoft/libcosmic" }
+cosmic-config = { git = "https://github.com/Matrinsoft/liblingmo" }
 freedesktop-icons = { package = "cosmic-freedesktop-icons", git = "https://github.com/Matrinsoft/freedesktop-icons" }
 
 memmap2 = "0.9.10"
@@ -56,10 +56,10 @@ mock-backend = []
 # Not usable at opt-level 0, at least with software renderer
 opt-level = 1
 
-# [patch.'https://github.com/Matrinsoft/libcosmic']
-# libcosmic = { path = "../libcosmic" }
+# [patch.'https://github.com/Matrinsoft/liblingmo']
+# liblingmo = { path = "../libcosmic" }
 # cosmic-config = { path = "../libcosmic/cosmic-config" }
 # cosmic-theme = { path = "../libcosmic/cosmic-theme" }
-# libcosmic = { git = "https://github.com/Matrinsoft/libcosmic//", branch = "theme-v2" }
-# cosmic-config = { git = "https://github.com/Matrinsoft/libcosmic//", branch = "theme-v2" }
-# cosmic-theme = { git = "https://github.com/Matrinsoft/libcosmic//", branch = "theme-v2" }
+# liblingmo = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
+# cosmic-config = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
+# cosmic-theme = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }

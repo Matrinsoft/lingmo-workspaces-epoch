@@ -1,7 +1,7 @@
 // Coppied from cosmic-app-list
-// - Put in a library? libcosmic?
+// - Put in a library? liblingmo?
 
-use cosmic::desktop::fde;
+use lingmo::desktop::fde;
 use itertools::Itertools;
 use std::path::PathBuf;
 

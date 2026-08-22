@@ -1,6 +1,6 @@
 use cctk::screencopy::{CaptureSession, CaptureSource, ScreencopyState};
 use cctk::wayland_client::QueueHandle;
-use cosmic::cctk;
+use lingmo::cctk;
 
 use std::sync::{Arc, Mutex};
 

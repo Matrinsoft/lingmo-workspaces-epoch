@@ -1,11 +1,11 @@
 // This widget defines it's cross axis size as the `index`th child's size
 
-use cosmic::iced::advanced::layout::flex::Axis;
-use cosmic::iced::advanced::layout::{self, Limits};
-use cosmic::iced::advanced::widget::{Operation, Tree};
-use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, renderer};
-use cosmic::iced::event::Event;
-use cosmic::iced::{Length, Point, Rectangle, Size};
+use lingmo::iced::advanced::layout::flex::Axis;
+use lingmo::iced::advanced::layout::{self, Limits};
+use lingmo::iced::advanced::widget::{Operation, Tree};
+use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, renderer};
+use lingmo::iced::event::Event;
+use lingmo::iced::{Length, Point, Rectangle, Size};
 use std::marker::PhantomData;
 
 // Duplicate of private methods
@@ -39,7 +39,7 @@ impl AxisExt for Axis {
 }
 
 pub fn size_cross_nth<Msg>(
-    children: Vec<cosmic::Element<Msg>>,
+    children: Vec<lingmo::Element<Msg>>,
     axis: Axis,
     index: usize,
 ) -> SizeCrossNth<Msg> {
@@ -53,12 +53,12 @@ pub fn size_cross_nth<Msg>(
 
 pub struct SizeCrossNth<'a, Msg> {
     axis: Axis,
-    children: Vec<cosmic::Element<'a, Msg>>,
+    children: Vec<lingmo::Element<'a, Msg>>,
     index: usize,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg> {
+impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for SizeCrossNth<'_, Msg> {
     fn size(&self) -> Size<Length> {
         Size {
             // width: Length::Fill
@@ -73,7 +73,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg>
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         limits: &Limits,
     ) -> layout::Node {
         let max_main = self.axis.main(limits.max());
@@ -133,7 +133,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg>
         &mut self,
         tree: &mut Tree,
         layout: Layout<'_>,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         operation: &mut dyn Operation<()>,
     ) {
         operation.container(None, layout.bounds());
@@ -156,7 +156,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg>
         event: &Event,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         clipboard: &mut dyn Clipboard,
         shell: &mut Shell<'_, Msg>,
         viewport: &Rectangle,
@@ -179,7 +179,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg>
         layout: Layout<'_>,
         cursor: mouse::Cursor,
         viewport: &Rectangle,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
     ) -> mouse::Interaction {
         self.children
             .iter()
@@ -197,8 +197,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg>
     fn draw(
         &self,
         tree: &Tree,
-        renderer: &mut cosmic::Renderer,
-        theme: &cosmic::Theme,
+        renderer: &mut lingmo::Renderer,
+        theme: &lingmo::Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -227,8 +227,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for SizeCrossNth<'_, Msg>
     }
 }
 
-impl<'a, Msg: 'static> From<SizeCrossNth<'a, Msg>> for cosmic::Element<'a, Msg> {
+impl<'a, Msg: 'static> From<SizeCrossNth<'a, Msg>> for lingmo::Element<'a, Msg> {
     fn from(widget: SizeCrossNth<'a, Msg>) -> Self {
-        cosmic::Element::new(widget)
+        lingmo::Element::new(widget)
     }
 }

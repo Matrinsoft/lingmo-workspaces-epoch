@@ -1,7 +1,7 @@
-// TODO: More generic widget in libcosmic? Improve iced layout system?
+// TODO: More generic widget in liblingmo? Improve iced layout system?
 // - preferred_size concept
 
-use cosmic::iced::{Length, Rectangle, Size};
+use lingmo::iced::{Length, Rectangle, Size};
 use std::marker::PhantomData;
 
 mod axis_toplevel_layout;

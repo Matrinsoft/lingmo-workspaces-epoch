@@ -2,7 +2,7 @@ use cctk::cosmic_protocols::toplevel_management::v1::client::zcosmic_toplevel_ma
 use cctk::toplevel_info::{ToplevelInfoHandler, ToplevelInfoState};
 use cctk::toplevel_management::{ToplevelManagerHandler, ToplevelManagerState};
 use cctk::wayland_client::{Connection, QueueHandle, WEnum};
-use cosmic::cctk;
+use lingmo::cctk;
 use wayland_protocols::ext::foreign_toplevel_list::v1::client::ext_foreign_toplevel_handle_v1::ExtForeignToplevelHandleV1;
 
 use super::{AppData, CaptureSource, Event};

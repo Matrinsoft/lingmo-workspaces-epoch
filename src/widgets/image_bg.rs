@@ -1,15 +1,15 @@
 // Renders image behind widget, and otherwise passes through all behavior
 
-use cosmic::iced::advanced::layout::{self};
-use cosmic::iced::advanced::widget::{Operation, Tree, tree};
-use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, overlay, renderer};
-use cosmic::iced::core::Renderer;
-use cosmic::iced::event::Event;
-use cosmic::iced::{Length, Rectangle, Size, Vector};
+use lingmo::iced::advanced::layout::{self};
+use lingmo::iced::advanced::widget::{Operation, Tree, tree};
+use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, mouse, overlay, renderer};
+use lingmo::iced::core::Renderer;
+use lingmo::iced::event::Event;
+use lingmo::iced::{Length, Rectangle, Size, Vector};
 
 use std::marker::PhantomData;
 
-pub fn image_bg<'a, Msg, T1: Into<cosmic::Element<'a, Msg>>, T2: Into<cosmic::Element<'a, Msg>>>(
+pub fn image_bg<'a, Msg, T1: Into<lingmo::Element<'a, Msg>>, T2: Into<lingmo::Element<'a, Msg>>>(
     content: T1,
     bg: T2,
 ) -> ImageBg<'a, Msg> {
@@ -21,12 +21,12 @@ pub fn image_bg<'a, Msg, T1: Into<cosmic::Element<'a, Msg>>, T2: Into<cosmic::El
 }
 
 pub struct ImageBg<'a, Msg> {
-    content: cosmic::Element<'a, Msg>,
-    bg: cosmic::Element<'a, Msg>,
+    content: lingmo::Element<'a, Msg>,
+    bg: lingmo::Element<'a, Msg>,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for ImageBg<'_, Msg> {
+impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for ImageBg<'_, Msg> {
     delegate::delegate! {
         to self.content.as_widget() {
             fn tag(&self) -> tree::Tag;
@@ -40,7 +40,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for ImageBg<'_, Msg> {
                 layout: Layout<'_>,
                 cursor: mouse::Cursor,
                 viewport: &Rectangle,
-                renderer: &cosmic::Renderer,
+                renderer: &lingmo::Renderer,
             ) -> mouse::Interaction;
         }
 
@@ -52,7 +52,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for ImageBg<'_, Msg> {
                 event: &Event,
                 layout: Layout<'_>,
                 cursor: mouse::Cursor,
-                renderer: &cosmic::Renderer,
+                renderer: &lingmo::Renderer,
                 clipboard: &mut dyn Clipboard,
                 shell: &mut Shell<'_, Msg>,
                 viewport: &Rectangle,
@@ -61,21 +61,21 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for ImageBg<'_, Msg> {
                 &'b mut self,
                 tree: &'b mut Tree,
                 layout: Layout<'b>,
-                renderer: &cosmic::Renderer,
+                renderer: &lingmo::Renderer,
                 viewport: &Rectangle,
                 translation: Vector,
-            ) -> Option<overlay::Element<'b, Msg, cosmic::Theme, cosmic::Renderer>>;
+            ) -> Option<overlay::Element<'b, Msg, lingmo::Theme, lingmo::Renderer>>;
             fn layout(
                     &mut self,
                     tree: &mut Tree,
-                    renderer: &cosmic::Renderer,
+                    renderer: &lingmo::Renderer,
                     limits: &layout::Limits,
                 ) -> layout::Node;
             fn operate(
                     &mut self,
                     tree: &mut Tree,
                     layout: Layout<'_>,
-                    renderer: &cosmic::Renderer,
+                    renderer: &lingmo::Renderer,
                     operation: &mut dyn Operation<()>,
                 );
         }
@@ -84,8 +84,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for ImageBg<'_, Msg> {
     fn draw(
         &self,
         state: &Tree,
-        renderer: &mut cosmic::Renderer,
-        theme: &cosmic::Theme,
+        renderer: &mut lingmo::Renderer,
+        theme: &lingmo::Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -104,8 +104,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for ImageBg<'_, Msg> {
     }
 }
 
-impl<'a, Msg: 'static> From<ImageBg<'a, Msg>> for cosmic::Element<'a, Msg> {
+impl<'a, Msg: 'static> From<ImageBg<'a, Msg>> for lingmo::Element<'a, Msg> {
     fn from(widget: ImageBg<'a, Msg>) -> Self {
-        cosmic::Element::new(widget)
+        lingmo::Element::new(widget)
     }
 }

@@ -1,5 +1,5 @@
-use cosmic::iced::Length;
-use cosmic::iced::advanced::layout::flex::Axis;
+use lingmo::iced::Length;
+use lingmo::iced::advanced::layout::flex::Axis;
 
 use super::LayoutToplevel;
 use super::axis_toplevel_layout::{AxisPoint, AxisRectangle, AxisSize, AxisToplevelLayout};

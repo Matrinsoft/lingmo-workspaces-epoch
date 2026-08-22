@@ -1,13 +1,13 @@
 //! If `visible` is set to `true`, behaves exactly as wrapped widget. If `false`,
 //! takes the same space but does not draw.
 
-use cosmic::iced::advanced::widget::{Operation, Tree};
-use cosmic::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, renderer};
-use cosmic::iced::event::Event;
-use cosmic::iced::{Length, Rectangle, Size};
+use lingmo::iced::advanced::widget::{Operation, Tree};
+use lingmo::iced::advanced::{Clipboard, Layout, Shell, Widget, layout, mouse, renderer};
+use lingmo::iced::event::Event;
+use lingmo::iced::{Length, Rectangle, Size};
 use std::marker::PhantomData;
 
-pub fn visibility_wrapper<'a, Msg, T: Into<cosmic::Element<'a, Msg>>>(
+pub fn visibility_wrapper<'a, Msg, T: Into<lingmo::Element<'a, Msg>>>(
     inner: T,
     visible: bool,
 ) -> VisibilityWrapper<'a, Msg> {
@@ -19,12 +19,12 @@ pub fn visibility_wrapper<'a, Msg, T: Into<cosmic::Element<'a, Msg>>>(
 }
 
 pub struct VisibilityWrapper<'a, Msg> {
-    content: cosmic::Element<'a, Msg>,
+    content: lingmo::Element<'a, Msg>,
     visible: bool,
     _msg: PhantomData<Msg>,
 }
 
-impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_, Msg> {
+impl<Msg> Widget<Msg, lingmo::Theme, lingmo::Renderer> for VisibilityWrapper<'_, Msg> {
     delegate::delegate! {
         to self.content.as_widget() {
             fn size(&self) -> Size<Length>;
@@ -36,7 +36,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_,
         &mut self,
         tree: &mut Tree,
         layout: Layout<'_>,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         operation: &mut dyn Operation<()>,
     ) {
         self.content
@@ -50,7 +50,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_,
         event: &Event,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         clipboard: &mut dyn Clipboard,
         shell: &mut Shell<'_, Msg>,
         viewport: &Rectangle,
@@ -73,7 +73,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
         viewport: &Rectangle,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
     ) -> mouse::Interaction {
         self.content.as_widget().mouse_interaction(
             &tree.children[0],
@@ -87,7 +87,7 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_,
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &cosmic::Renderer,
+        renderer: &lingmo::Renderer,
         limits: &layout::Limits,
     ) -> layout::Node {
         self.content
@@ -98,8 +98,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_,
     fn draw(
         &self,
         tree: &Tree,
-        renderer: &mut cosmic::Renderer,
-        theme: &cosmic::Theme,
+        renderer: &mut lingmo::Renderer,
+        theme: &lingmo::Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -127,8 +127,8 @@ impl<Msg> Widget<Msg, cosmic::Theme, cosmic::Renderer> for VisibilityWrapper<'_,
     }
 }
 
-impl<'a, Msg: 'a> From<VisibilityWrapper<'a, Msg>> for cosmic::Element<'a, Msg> {
+impl<'a, Msg: 'a> From<VisibilityWrapper<'a, Msg>> for lingmo::Element<'a, Msg> {
     fn from(widget: VisibilityWrapper<'a, Msg>) -> Self {
-        cosmic::Element::new(widget)
+        lingmo::Element::new(widget)
     }
 }
