@@ -999,7 +999,7 @@ dependencies = [
 [[package]]
 name = "cosmic-bg-config"
 version = "1.0.3"
-source = "git+https://github.com/Matrinsoft/lingmo-background#ed65f7d3dc9e3d4af3cd65244a966e01bff0f730"
+source = "git+https://github.com/Matrinsoft/lingmo-background#f1721e2fc931d3d11b616cda20d002ff114d1cf1"
 dependencies = [
  "cosmic-config",
  "derive_setters",
@@ -1024,7 +1024,7 @@ dependencies = [
 [[package]]
 name = "cosmic-comp-config"
 version = "1.0.0"
-source = "git+https://github.com/Matrinsoft/lingmo-comp#693d1ad775193deb95a33810b5eac59684ca2ac0"
+source = "git+https://github.com/Matrinsoft/lingmo-comp#dd27e393e0d55959c85f37bbd3a6f2b36bc5922c"
 dependencies = [
  "cosmic-config",
  "input",
@@ -1034,7 +1034,7 @@ dependencies = [
 [[package]]
 name = "cosmic-config"
 version = "1.0.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "atomicwrites",
  "cosmic-config-derive",
@@ -1055,7 +1055,7 @@ dependencies = [
 [[package]]
 name = "cosmic-config-derive"
 version = "1.0.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "quote",
  "syn",
@@ -1078,7 +1078,7 @@ dependencies = [
 [[package]]
 name = "cosmic-panel-config"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/lingmo-panel#029400b2b447d9d31f1a772d7f6f0d5eed2ea21e"
+source = "git+https://github.com/Matrinsoft/lingmo-panel#7b2cb2f5f7141c985282f60a52285923603266c1"
 dependencies = [
  "anyhow",
  "cosmic-config",
@@ -1106,7 +1106,7 @@ dependencies = [
 [[package]]
 name = "cosmic-settings-config"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/lingmo-settings-daemon#8c54bbbc10485c31e8717c21e119e19b87eeb3ea"
+source = "git+https://github.com/Matrinsoft/lingmo-settings-daemon#51d5cf6e7032f34b8eb62c30f74025c5c2dfa3d6"
 dependencies = [
  "cosmic-config",
  "ron 0.11.0",
@@ -1151,7 +1151,7 @@ dependencies = [
 [[package]]
 name = "cosmic-theme"
 version = "1.0.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "almost",
  "configparser",
@@ -2447,7 +2447,7 @@ dependencies = [
 [[package]]
 name = "iced"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "dnd",
  "iced_accessibility",
@@ -2468,7 +2468,7 @@ dependencies = [
 [[package]]
 name = "iced_accessibility"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "accesskit",
  "accesskit_winit",
@@ -2477,7 +2477,7 @@ dependencies = [
 [[package]]
 name = "iced_core"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "bitflags 2.13.0",
  "bytes",
@@ -2502,7 +2502,7 @@ dependencies = [
 [[package]]
 name = "iced_debug"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "iced_core",
  "iced_futures",
@@ -2512,7 +2512,7 @@ dependencies = [
 [[package]]
 name = "iced_futures"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "futures",
  "iced_core",
@@ -2526,7 +2526,7 @@ dependencies = [
 [[package]]
 name = "iced_graphics"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "bitflags 2.13.0",
  "bytemuck",
@@ -2547,7 +2547,7 @@ dependencies = [
 [[package]]
 name = "iced_program"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "iced_graphics",
  "iced_runtime",
@@ -2556,7 +2556,7 @@ dependencies = [
 [[package]]
 name = "iced_renderer"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "iced_graphics",
  "iced_tiny_skia",
@@ -2568,7 +2568,7 @@ dependencies = [
 [[package]]
 name = "iced_runtime"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "bytes",
  "cosmic-client-toolkit",
@@ -2583,7 +2583,7 @@ dependencies = [
 [[package]]
 name = "iced_tiny_skia"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "bytemuck",
  "cosmic-text",
@@ -2600,7 +2600,7 @@ dependencies = [
 [[package]]
 name = "iced_wgpu"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "as-raw-xcb-connection",
  "bitflags 2.13.0",
@@ -2631,7 +2631,7 @@ dependencies = [
 [[package]]
 name = "iced_widget"
 version = "0.14.2"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "cosmic-client-toolkit",
  "dnd",
@@ -2649,7 +2649,7 @@ dependencies = [
 [[package]]
 name = "iced_winit"
 version = "0.14.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "cosmic-client-toolkit",
  "cursor-icon",
@@ -3162,7 +3162,7 @@ checksum = "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
 [[package]]
 name = "libcosmic"
 version = "1.0.0"
-source = "git+https://github.com/Matrinsoft/liblingmo#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+source = "git+https://github.com/Matrinsoft/liblingmo#891b24cd05ae5ed62d9ffabaa1ce991cb49227e4"
 dependencies = [
  "apply",
  "ashpd 0.12.3",
@@ -6860,7 +6860,7 @@ checksum = "2fb433233f2df9344722454bc7e96465c9d03bff9d77c248f9e7523fe79585b5"
 [[package]]
 name = "xdg-shell-wrapper-config"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/lingmo-panel#029400b2b447d9d31f1a772d7f6f0d5eed2ea21e"
+source = "git+https://github.com/Matrinsoft/lingmo-panel#7b2cb2f5f7141c985282f60a52285923603266c1"
 dependencies = [
  "serde",
  "wayland-protocols-wlr",
