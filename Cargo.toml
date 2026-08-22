@@ -21,7 +21,7 @@ libcosmic = { git = "https://github.com/Matrinsoft/liblingmo", default-features 
     "winit",
 ] }
 cosmic-config = { git = "https://github.com/Matrinsoft/liblingmo" }
-freedesktop-icons = { package = "cosmic-freedesktop-icons", git = "https://github.com/Matrinsoft/freedesktop-icons" }
+freedesktop-icons = { package = "cosmic-freedesktop-icons", git = "https://github.com/pop-os/freedesktop-icons" }
 
 memmap2 = "0.9.10"
 tokio = "1.49.0"
