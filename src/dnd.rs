@@ -11,10 +11,10 @@ use crate::backend::{ExtForeignToplevelHandleV1, ExtWorkspaceHandleV1};
 // Include `pid` in mime. Want to drag between our surfaces, but not another
 // process, if we use Wayland object ids.
 static WORKSPACE_MIME: LazyLock<String> =
-    LazyLock::new(|| format!("text/x.cosmic-workspace-id-{}", std::process::id()));
+    LazyLock::new(|| format!("text/x.lingmo-workspace-id-{}", std::process::id()));
 
 static TOPLEVEL_MIME: LazyLock<String> =
-    LazyLock::new(|| format!("text/x.cosmic-toplevel-id-{}", std::process::id()));
+    LazyLock::new(|| format!("text/x.lingmo-toplevel-id-{}", std::process::id()));
 
 #[derive(Clone, Debug)]
 pub enum DragSurface {

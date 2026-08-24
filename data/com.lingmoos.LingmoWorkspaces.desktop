@@ -14,13 +14,13 @@ Name[it]=Spazi di lavoro
 Name[uk]=Простори
 Comment=
 Type=Application
-Exec=cosmic-workspaces
+Exec=lingmo-workspaces
 Terminal=false
-Categories=COSMIC;
+Categories=Lingmo;
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-Keywords=COSMIC;ICED;
-Keywords[ar]=كوزمِك;آيسِد;
+Keywords=Lingmo;ICED;
+Keywords[ar]=لينجمو;آيسِد;
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-Icon=com.system76.CosmicWorkspaces
+Icon=com.lingmoos.LingmoWorkspaces
 StartupNotify=true
 NoDisplay=true

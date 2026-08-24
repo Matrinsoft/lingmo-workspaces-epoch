@@ -21,4 +21,4 @@ Architecture: amd64 arm64
 Depends:
   ${misc:Depends},
   ${shlibs:Depends}
-Description: Cosmic workspaces
+Description: Lingmo workspaces

@@ -31,7 +31,7 @@ struct DesktopInfo {
 
 fn default_app_icon() -> PathBuf {
     freedesktop_icons::lookup("application-default")
-        .with_theme("Cosmic")
+        .with_theme("Lingmo")
         .force_svg()
         .with_cache()
         .find()

@@ -7,7 +7,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 fn create_memfd() -> rustix::io::Result<OwnedFd> {
     let fd = rustix::io::retry_on_intr(|| {
         rustix::fs::memfd_create(
-            "cosmic-workspaces-shm",
+            "lingmo-workspaces-shm",
             rustix::fs::MemfdFlags::CLOEXEC | rustix::fs::MemfdFlags::ALLOW_SEALING,
         )
     })?;
@@ -29,7 +29,7 @@ pub fn create_memfile() -> rustix::io::Result<OwnedFd> {
 
         let time = SystemTime::now();
         let name = format!(
-            "/cosmic-workspaces-shm-{}",
+            "/lingmo-workspaces-shm-{}",
             time.duration_since(UNIX_EPOCH).unwrap().subsec_nanos()
         );
 

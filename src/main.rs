@@ -56,7 +56,7 @@ use dnd::{DragSurface, DragToplevel, DragWorkspace, DropTarget};
 const SCROLL_RATE_LIMIT: Duration = Duration::from_millis(200);
 
 #[derive(Clone, Debug, Default, PartialEq, CosmicConfigEntry)]
-struct CosmicWorkspacesConfig {
+struct LingmoWorkspacesConfig {
     show_workspace_number: bool,
     show_workspace_name: bool,
 }
@@ -107,7 +107,7 @@ enum Msg {
     #[allow(dead_code)]
     NewWorkspace,
     CompConfig(Box<CosmicCompConfig>),
-    Config(CosmicWorkspacesConfig),
+	Config(LingmoWorkspacesConfig),
     BgConfig(cosmic_bg_config::state::State),
     UpdateToplevelIcon(String, Option<PathBuf>),
     OnScroll(wl_output::WlOutput, ScrollDelta),
@@ -261,7 +261,7 @@ impl App {
             move || SctkLayerSurfaceSettings {
                 id,
                 keyboard_interactivity: KeyboardInteractivity::Exclusive,
-                namespace: "cosmic-workspace-overview".into(),
+			namespace: "lingmo-workspace-overview".into(),
                 layer: Layer::Top,
                 size: Some((None, None)),
                 output: IcedOutput::Output(output.clone()),
@@ -330,11 +330,11 @@ impl App {
                 cosmic_comp_config::workspace::Action::None => return Task::none(),
                 cosmic_comp_config::workspace::Action::OpenLauncher => {
                     // self.common.config.system_actions.get(&Launcher)
-                    Some("cosmic-launcher \"$@\"".to_string())
+				Some("lingmo-launcher \"$@\"".to_string())
                 }
                 cosmic_comp_config::workspace::Action::OpenApplications => {
                     // self.common.config.system_actions.get(&Applications)
-                    Some("cosmic-app-library \"$@\"".to_string())
+				Some("lingmo-app-library \"$@\"".to_string())
                 }
             };
             if let Some(cmd) = cmd {
@@ -519,7 +519,7 @@ impl Application for App {
     type Message = Msg;
     type Executor = cosmic::SingleThreadExecutor;
     type Flags = Args;
-    const APP_ID: &'static str = "com.system76.CosmicWorkspaces";
+	const APP_ID: &'static str = "com.lingmoos.LingmoWorkspaces";
 
     fn init(mut core: cosmic::app::Core, _flags: Self::Flags) -> (Self, Task<cosmic::Action<Msg>>) {
         core.set_app_type(cosmic::core::AppType::System);
@@ -1027,10 +1027,10 @@ impl Application for App {
                 let cmd = match self.conf.workspace_config.action_on_typing {
                     cosmic_comp_config::workspace::Action::None => return Task::none(),
                     cosmic_comp_config::workspace::Action::OpenLauncher => {
-                        Some("cosmic-launcher \"$@\"".to_string())
+    				Some("lingmo-launcher \"$@\"".to_string())
                     }
                     cosmic_comp_config::workspace::Action::OpenApplications => {
-                        Some("cosmic-app-library \"$@\"".to_string())
+    				Some("lingmo-app-library \"$@\"".to_string())
                     }
                 };
                 if let Some(cmd) = cmd {
@@ -1092,9 +1092,9 @@ impl Application for App {
             }
             _ => None,
         });
-        let config_subscription = cosmic_config::config_subscription::<_, CosmicWorkspacesConfig>(
+        let config_subscription = cosmic_config::config_subscription::<_, LingmoWorkspacesConfig>(
             "config-sub",
-            "com.system76.CosmicWorkspaces".into(),
+            "com.lingmoos.LingmoWorkspaces".into(),
             1,
         )
         .map(|update| {
@@ -1179,7 +1179,7 @@ fn panel_subscriptions<'a>(
     let mut subscriptions = vec![
         cosmic_config::config_subscription::<_, CosmicPanelContainerConfigEntry>(
             "panel-config-subscription",
-            "com.system76.CosmicPanel".into(),
+            "com.lingmoos.LingmoPanel".into(),
             1,
         )
         .map(|update| Msg::PanelContainerEntries(update.config.entries)),
@@ -1188,7 +1188,7 @@ fn panel_subscriptions<'a>(
         subscriptions.push(
             cosmic_config::config_subscription::<_, CosmicPanelConfig>(
                 ("panel-config-subscription", entry.to_owned()),
-                format!("com.system76.CosmicPanel.{}", entry).into(),
+                format!("com.lingmoos.LingmoPanel.{}", entry).into(),
                 1,
             )
             .map(|update| Msg::PanelConfig(update.config)),

@@ -18,8 +18,8 @@ ifneq ($(VENDOR),0)
 	ARGS += --frozen
 endif
 
-BIN = cosmic-workspaces
-APPID = com.system76.CosmicWorkspaces
+BIN = lingmo-workspaces
+APPID = com.lingmoos.LingmoWorkspaces
 
 all: $(BIN)
 

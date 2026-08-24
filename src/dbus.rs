@@ -11,12 +11,12 @@ pub enum Event {
     Hide,
 }
 
-struct CosmicWorkspaces {
+struct LingmoWorkspaces {
     event_sender: broadcast::Sender<Event>,
 }
 
-#[zbus::interface(name = "com.system76.CosmicWorkspaces")]
-impl CosmicWorkspaces {
+#[zbus::interface(name = "com.lingmoos.LingmoWorkspaces")]
+impl LingmoWorkspaces {
     fn show(&self) {
         let _ = self.event_sender.send(Event::Show);
     }
@@ -43,8 +43,8 @@ impl Interface {
         let event_sender = broadcast::Sender::new(8);
         conn.object_server()
             .at(
-                "/com/system76/CosmicWorkspaces",
-                CosmicWorkspaces {
+                "/com/lingmoos/LingmoWorkspaces",
+                LingmoWorkspaces {
                     event_sender: event_sender.clone(),
                 },
             )
@@ -52,7 +52,7 @@ impl Interface {
         Ok(Interface {
             emitter: zbus::object_server::SignalEmitter::new(
                 &conn,
-                "/com/system76/CosmicWorkspaces",
+                "/com/lingmoos/LingmoWorkspaces",
             )
             .unwrap(),
             event_sender,
