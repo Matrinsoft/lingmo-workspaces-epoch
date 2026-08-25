@@ -1105,7 +1105,7 @@ impl Application for App {
         });
         let comp_config_subscription = cosmic_config::config_subscription::<_, CosmicCompConfig>(
             "comp-config-sub",
-            "com.system76.CosmicComp".into(),
+            "com.lingmoos.LingmoComp".into(),
             1,
         )
         .map(|update| {
