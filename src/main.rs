@@ -177,7 +177,7 @@ struct LayerSurface {
 #[derive(Default)]
 struct Conf {
     workspace_config: cosmic_comp_config::workspace::WorkspaceConfig,
-    config: CosmicWorkspacesConfig,
+    config: LingmoWorkspacesConfig,
     bg: cosmic_bg_config::state::State,
 }
 
